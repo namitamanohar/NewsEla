@@ -1,7 +1,5 @@
-import "./styles.css";
 
-
-const questionsArray= require("../quiz_question_data.json"); 
+const questionsArray = require("../quiz_question_data.json"); 
 //console.log(quizArray);
 
 let lowScoreResponses = questionsArray.filter(question => question.percent_correct < 0.5)
@@ -57,14 +55,14 @@ const commonWords =[
   "paragraph", 
   "best",
   ];
-let repeatedWords = {}
-let sortedRepeatedWords = []
-const calculateWordRepeats = (questionResponse) => {
+  const calculateWordRepeats = (questionResponses) => {
+    let repeatedWords = {}
+    let sortedRepeatedWords = []
 
-  for(var question of questionResponse){
+  for(var question of questionResponses){
     //console.log(question.text)
     var textNoPunctuation = question.text.replace(/[^a-zA-Z']/g,' ').toLowerCase();
-    //console.log(questionNoPunctuation)
+    //console.log(textNoPunctuation)
     var splitText = textNoPunctuation.split(" ");
     var wordsArray = splitText.filter(x => !commonWords.includes(x));
     //console.log(splitText)
@@ -86,5 +84,5 @@ sortedRepeatedWords.sort(function(a,b){
 console.log(sortedRepeatedWords)
 }
 
-//calculateWordRepeats(lowScoreResponses);
+calculateWordRepeats(lowScoreResponses);
 calculateWordRepeats(highScoreResponses);
